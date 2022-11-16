@@ -13,7 +13,7 @@ class ItemsOf {
         children: [
           SlidableAction(
             onPressed: (doNothing){
-              HomeViewModel().apiDeleteUsers("${ApiService.GET_API}/$index", index);
+              HomeViewModel().removePost(index);
             },
             backgroundColor: Colors.red,
             foregroundColor: Colors.white,

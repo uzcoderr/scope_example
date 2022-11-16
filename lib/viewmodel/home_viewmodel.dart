@@ -15,11 +15,8 @@ class HomeViewModel extends Model {
         });
   }
 
-  void apiDeleteUsers(String api,int index) {
-    ApiService.DELETE(api, ApiService.paramsEmpty()).then((value) => {
-        posts.removeAt(index),
-        notifyListeners()
-    });
+  Future<bool?> apiDeleteUsers(String api) {
+    return ApiService.DELETE(api, ApiService.paramsEmpty());
   }
 
   void nextPage(BuildContext context, Post post, int index) async {
@@ -31,5 +28,11 @@ class HomeViewModel extends Model {
 
     posts[index] = result;
     notifyListeners();
+  }
+  Future<bool?> removePost(index) {
+    var response = apiDeleteUsers("${ApiService.GET_API}/$index");
+    posts.removeAt(index);
+    notifyListeners();
+    return response;
   }
 }
